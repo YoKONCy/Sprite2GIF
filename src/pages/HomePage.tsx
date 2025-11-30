@@ -33,15 +33,13 @@ const HomePage: React.FC = () => {
   };
 
   const handleParameterChange = (params: GIFParameters) => {
-    const size = Math.min(params.rows, params.cols);
-    const next = { ...params, rows: size, cols: size };
     setAppState(prev => ({ 
       ...prev, 
-      gifParameters: next 
+      gifParameters: params 
     }));
     
     if (appState.images.length > 0) {
-      sliceSpritesheet(appState.images[0], next.rows, next.cols).then(frames => {
+      sliceSpritesheet(appState.images[0], params.rows, params.cols).then(frames => {
         setAppState(prev => ({ ...prev, previewFrames: frames }));
       });
     }
@@ -100,7 +98,7 @@ const HomePage: React.FC = () => {
             <Sparkles className="h-8 w-8 text-blue-500 mr-3" />
             <h1 className="text-4xl font-bold text-gray-800">GIF帧图集生成器</h1>
           </div>
-          <p className="text-gray-600 text-lg">上传单张4×4帧图集，自动切分并生成GIF</p>
+          <p className="text-gray-600 text-lg">上传单张帧图集，支持自定义行×列切分并生成GIF</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

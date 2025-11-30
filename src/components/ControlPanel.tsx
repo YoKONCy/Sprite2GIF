@@ -23,9 +23,20 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
     });
   };
 
-  const setGridSize = (n: number) => {
+  const setRows = (n: number) => {
     onParameterChange({
       rows: n,
+      cols,
+      duration,
+      loopMode,
+      direction,
+      scale
+    });
+  };
+
+  const setCols = (n: number) => {
+    onParameterChange({
+      rows,
       cols: n,
       duration,
       loopMode,
@@ -38,23 +49,34 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
     <div className="bg-white rounded-lg card-shadow p-6 space-y-6 animate-fade-in">
       <h2 className="text-xl font-semibold text-gray-800 mb-4">参数设置</h2>
       
-      {/* 网格大小 N×N */}
+      {/* 网格行列 */}
       <div className="space-y-4">
-        <h3 className="text-lg font-medium text-gray-700">网格大小</h3>
-        <div>
-          <label className="block text-sm font-medium text-gray-600 mb-2">
-            大小: {rows} × {cols}
-          </label>
-          <input
-            type="range"
-            min="1"
-            max="8"
-            value={rows}
-            onChange={(e) => setGridSize(parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-          />
-          <p className="text-xs text-gray-500 mt-1">行与列保持相同</p>
+        <h3 className="text-lg font-medium text-gray-700">网格行列</h3>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">行数: {rows}</label>
+            <input
+              type="range"
+              min="1"
+              max="8"
+              value={rows}
+              onChange={(e) => setRows(parseInt(e.target.value))}
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">列数: {cols}</label>
+            <input
+              type="range"
+              min="1"
+              max="8"
+              value={cols}
+              onChange={(e) => setCols(parseInt(e.target.value))}
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            />
+          </div>
         </div>
+        <p className="text-xs text-gray-500">当前: {rows} × {cols}</p>
       </div>
 
       {/* 动画参数 */}
