@@ -89,9 +89,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           </label>
           <input
             type="range"
-            min="0.1"
+            min="0.05"
             max="5"
-            step="0.1"
+            step="0.05"
             value={duration}
             onChange={(e) => handleParameterChange('duration', parseFloat(e.target.value))}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
